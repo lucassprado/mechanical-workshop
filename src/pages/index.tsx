@@ -1,11 +1,25 @@
+import { useState } from 'react';
 import Head from 'next/head';
-
-import { FaUserTie } from 'react-icons/fa';
-import { AiFillCar } from 'react-icons/ai'
 
 import styles from './home.module.scss';
 
+import { MdEditNote } from "react-icons/md";
+
+type ServiceOrderProps = {
+  id: string;
+  vehicleName: string;
+  plate: string;
+  status: string;
+  createdAt: Date;
+}
+
 export default function Home() {
+  const [serviceOrders, setServiceOrders] = useState<ServiceOrderProps[]>([
+    { id: '1', vehicleName: 'Palio', plate: 'HDA44512', status: 'Aguardando pagamento', createdAt: new Date() },
+    { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
+    { id: '3', vehicleName: 'Corsa', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
+  ]);
+  
   return (
     <>
       <Head>
@@ -13,57 +27,42 @@ export default function Home() {
       </Head>
 
       <main className={styles.osContainer}>
-        <div className={styles.osContent}>
-          <header className={styles.osHeader}>
-            <p>
-              <FaUserTie color="#eba417" className={styles.userIcon} />
-              Lucas Prado
-            </p>
-            <p>07/10/2001</p>
-          </header>
+        <h1>OS's</h1>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Veículo</th>
+              <th>Placa</th>
+              <th>Status</th>
+              <th>Data</th>
+            </tr>
+          </thead>
 
-          <div className={styles.osInfos}>
-            <p>
-              <AiFillCar color="#619fff" className={styles.userCar} />
-              Palio Weekend  
-            </p>
-            <p>R$150,00</p>
-          </div>
-        </div>
-        <div className={styles.osContent}>
-          <header className={styles.osHeader}>
-            <p>
-              <FaUserTie color="#eba417" className={styles.userIcon} />
-              Lucas Prado
-            </p>
-            <p>07/10/2001</p>
-          </header>
-
-          <div className={styles.osInfos}>
-            <p>
-              <AiFillCar color="#619fff" className={styles.userCar} />
-              Palio Weekend  
-            </p>
-            <p>R$150,00</p>
-          </div>
-        </div>
-        <div className={styles.osContent}>
-          <header className={styles.osHeader}>
-            <p>
-              <FaUserTie color="#eba417" className={styles.userIcon} />
-              Lucas Prado
-            </p>
-            <p>07/10/2001</p>
-          </header>
-
-          <div className={styles.osInfos}>
-            <p>
-              <AiFillCar color="#619fff" className={styles.userCar} />
-              Palio Weekend  
-            </p>
-            <p>R$150,00</p>
-          </div>
-        </div>
+          <tbody>
+            {
+              serviceOrders.map(serviceOrder => {
+                return (
+                  <tr key={serviceOrder.id}>
+                    <td>{serviceOrder.id}</td>
+                    <td>{serviceOrder.vehicleName}</td>
+                    <td>{serviceOrder.plate}</td>
+                    <td>{serviceOrder.status}</td>
+                    <td>
+                      {new Intl.DateTimeFormat('pt-BR').format(
+                        new Date(serviceOrder.createdAt)
+                      )}
+                    </td>
+                    <td>
+                      <MdEditNote/>
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
       </main>
     </>
   );
