@@ -3,35 +3,42 @@
   margin: 0 auto;
   padding: 0 2rem;
   height: calc(100vh - 5rem);
-}
 
-.osContent {
-  padding: 2rem;
+  h1 {
+    margin: 2rem 0 2rem;
+  }
 
-  background-color: var(--gray-800);
-  font-size: 1.5rem;
-  
-  .osHeader {
-    margin-bottom: 5rem;
-  
-    display: flex;
-    justify-content: space-between;
-  
-    .userIcon {
-      margin-right: 1rem;
+  table {
+    width: 100%;
+    border-spacing: 0 .5rem;
+
+    th {
+      font-weight: 400;
+      padding: 1rem 2rem;
+      text-align: left;
+      line-height: 1.5rem;
     }
-  }
 
-  .osInfos {
-    display: flex;
-    justify-content: space-between;
-  }
+    td {
+      padding: 1rem 2rem;
+      border: 0;
+      background-color: var(--gray-800);
 
-  .userCar {
-    margin-right: 1rem;
-  }
+      &:first-child {
+        color: var(--text-title);
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+      }
 
-  & + div {
-    margin-top: 1rem;
+      &:last-child {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+      }
+
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 }
