@@ -1,0 +1,37 @@
+.osContainer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: calc(100vh - 5rem);
+}
+
+.osContent {
+  padding: 2rem;
+
+  background-color: var(--gray-800);
+  font-size: 1.5rem;
+  
+  .osHeader {
+    margin-bottom: 5rem;
+  
+    display: flex;
+    justify-content: space-between;
+  
+    .userIcon {
+      margin-right: 1rem;
+    }
+  }
+
+  .osInfos {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .userCar {
+    margin-right: 1rem;
+  }
+
+  & + div {
+    margin-top: 1rem;
+  }
+}
