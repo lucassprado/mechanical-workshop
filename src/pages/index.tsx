@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
 
+import { api } from '../services/axios';
+
 import styles from './home.module.scss';
 
 import { MdEditNote } from "react-icons/md";
@@ -19,7 +21,7 @@ export default function Home() {
     { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
     { id: '3', vehicleName: 'Corsa', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
   ]);
-  
+
   return (
     <>
       <Head>
