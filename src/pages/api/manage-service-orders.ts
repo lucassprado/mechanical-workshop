@@ -7,6 +7,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const serviceOrder = req.body;
     
+    console.log(serviceOrder)
+
     fauna.query(
       q.Create(
         q.Collection('service_orders'),
