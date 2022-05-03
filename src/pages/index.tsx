@@ -19,7 +19,7 @@ export default function Home() {
     { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
     { id: '3', vehicleName: 'Corsa', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
   ]);
-  
+
   return (
     <>
       <Head>
@@ -27,8 +27,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.osContainer}>
-        <h1>OS's</h1>
-        
+        <h1>Ordens de Serviços</h1>
+
         <table>
           <thead>
             <tr>
@@ -37,6 +37,7 @@ export default function Home() {
               <th>Placa</th>
               <th>Status</th>
               <th>Data</th>
+              <th>Editar</th>
             </tr>
           </thead>
 
