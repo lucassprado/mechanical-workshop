@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+
+import { NewOrderModal } from '../../components/NewOrderModal';
 
 import styles from './styles.module.scss';
 
 import { MdEditNote } from 'react-icons/md';
 import { AiFillPlusCircle } from 'react-icons/ai';
-import Link from 'next/link';
 
 type ServiceOrderProps = {
   id: string;
@@ -16,6 +18,16 @@ type ServiceOrderProps = {
 }
 
 export default function Orders() {
+  const [isNewOrderModalOpen, setIsNewOrderModalOpen] = useState(false);
+  
+  function handleOpenNewOrderModal() {
+    setIsNewOrderModalOpen(true);
+  }
+
+  function handleCloseNewOrderModal() {
+    setIsNewOrderModalOpen(false);
+  }
+  
   const [serviceOrders, setServiceOrders] = useState<ServiceOrderProps[]>([
     { id: '1', vehicleName: 'Palio', plate: 'HDA44512', status: 'Aguardando pagamento', createdAt: new Date() },
     { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
@@ -31,12 +43,10 @@ export default function Orders() {
       <main className={styles.osContainer}>
         <div className={styles.osHeader}>
           <h1>Ordens de Serviço</h1>
-          <Link href="/orders/new">
-            <button>
-              <a>Criar</a>
+            <button onClick={handleOpenNewOrderModal}>
+              <span>Criar</span>
               <AiFillPlusCircle />
             </button>
-          </Link>
         </div>
 
         <table className={styles.osTable}>
@@ -75,6 +85,11 @@ export default function Orders() {
           </tbody>
         </table>
       </main>
+
+      <NewOrderModal
+        isOpen={isNewOrderModalOpen}
+        onRequestClose={handleCloseNewOrderModal}
+      />
     </>
   );
 }
