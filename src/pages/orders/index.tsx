@@ -7,6 +7,8 @@ import { NewOrderModal } from '../../components/NewOrderModal';
 
 import styles from './styles.module.scss';
 
+import Link from 'next/link';
+
 import { MdEditNote } from 'react-icons/md';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
@@ -17,14 +19,16 @@ type ServiceOrderProps = {
   plate: string;
   year: string;
   status: string;
+  mechanic: string;
   description: string;
   createdAt: Date;
 }
 
 export default function Orders() {
   const [isNewOrderModalOpen, setIsNewOrderModalOpen] = useState(false);
+
   const [orders, setOrders] = useState<ServiceOrderProps[]>([]);
-  
+
   function handleOpenNewOrderModal() {
     setIsNewOrderModalOpen(true);
   }
@@ -75,6 +79,7 @@ export default function Orders() {
               <th>ID</th>
               <th>Veículo</th>
               <th>Placa</th>
+              <th>Mecânico</th>
               <th>Status</th>
               <th>Data</th>
               <th>Editar</th>
@@ -89,6 +94,7 @@ export default function Orders() {
                     <td>{serviceOrder.id}</td>
                     <td>{serviceOrder.vehicle}</td>
                     <td>{serviceOrder.plate}</td>
+                    <td>{serviceOrder.mechanic}</td>
                     <td>{serviceOrder.status}</td>
                     <td>
                       {new Intl.DateTimeFormat('pt-BR').format(
@@ -96,7 +102,11 @@ export default function Orders() {
                       )}
                     </td>
                     <td>
-                      <MdEditNote/>
+                      <Link href='#'>
+                        <a>
+                          <MdEditNote/>
+                        </a>
+                      </Link>
                     </td>
                   </tr>
                 );
