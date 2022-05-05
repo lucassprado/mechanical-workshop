@@ -14,12 +14,13 @@ type ServiceOrderProps = {
   vehicleName: string;
   plate: string;
   status: string;
+  mechanic: string;
   createdAt: Date;
 }
 
 export default function Orders() {
   const [isNewOrderModalOpen, setIsNewOrderModalOpen] = useState(false);
-  
+
   function handleOpenNewOrderModal() {
     setIsNewOrderModalOpen(true);
   }
@@ -27,11 +28,11 @@ export default function Orders() {
   function handleCloseNewOrderModal() {
     setIsNewOrderModalOpen(false);
   }
-  
+
   const [serviceOrders, setServiceOrders] = useState<ServiceOrderProps[]>([
-    { id: '1', vehicleName: 'Palio', plate: 'HDA44512', status: 'Aguardando pagamento', createdAt: new Date() },
-    { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
-    { id: '3', vehicleName: 'Corsa', plate: 'HDGBHABD556', status: 'Aguardando pagamento', createdAt: new Date() },
+    { id: '1', vehicleName: 'Palio', plate: 'HDA44512', status: 'Aguardando pagamento', mechanic: 'Jubileu', createdAt: new Date() },
+    { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', mechanic: 'Elizeu', createdAt: new Date() },
+    { id: '3', vehicleName: 'Corsa', plate: 'HDGBHABD556', status: 'Aguardando pagamento', mechanic: 'Irineu', createdAt: new Date() },
   ]);
 
   return (
@@ -55,6 +56,7 @@ export default function Orders() {
               <th>ID</th>
               <th>Veículo</th>
               <th>Placa</th>
+              <th>Mecânico</th>
               <th>Status</th>
               <th>Data</th>
               <th>Editar</th>
@@ -69,6 +71,7 @@ export default function Orders() {
                     <td>{serviceOrder.id}</td>
                     <td>{serviceOrder.vehicleName}</td>
                     <td>{serviceOrder.plate}</td>
+                    <td>{serviceOrder.mechanic}</td>
                     <td>{serviceOrder.status}</td>
                     <td>
                       {new Intl.DateTimeFormat('pt-BR').format(
@@ -76,7 +79,11 @@ export default function Orders() {
                       )}
                     </td>
                     <td>
-                      <MdEditNote/>
+                      <Link href='#'>
+                        <a>
+                          <MdEditNote/>
+                        </a>
+                      </Link>
                     </td>
                   </tr>
                 );

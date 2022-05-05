@@ -17,4 +17,18 @@
       color: var(--cyan-500);
     }
   }
+
+  div {
+    margin-left: 4rem;
+    font-size: 1.2rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--gray-800);
+    }
+
+    li {
+      list-style: none;
+    }
+  }
 }
