@@ -28,7 +28,7 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
       vehicle: vehicleName,
       plate: vehiclePlate,
       year: vehicleYear,
-      status: 'created',
+      status: 1,
       description,
       createdAt: new Date()
     }

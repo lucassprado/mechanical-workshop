@@ -14,13 +14,9 @@ export function Header() {
         </Link>
 
         <div>
-          <ul>
             <Link href='/orders'>
-              <a>
-                <li>Ordens de Serviço</li>
-              </a>
+              <span>Ordens de Serviço</span>
             </Link>
-          </ul>
         </div>
       </div>
     </header>

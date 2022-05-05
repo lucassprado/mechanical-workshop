@@ -26,6 +26,7 @@ type ServiceOrderProps = {
 
 export default function Orders() {
   const [isNewOrderModalOpen, setIsNewOrderModalOpen] = useState(false);
+  const [haveNewOrders, setHaveNewOrders] = useState(false);
 
   const [orders, setOrders] = useState<ServiceOrderProps[]>([]);
 
@@ -35,28 +36,32 @@ export default function Orders() {
 
   function handleCloseNewOrderModal() {
     setIsNewOrderModalOpen(false);
-  }
 
-  async function getOrders() {
-    const response = await api.get('/manage-service-order');
-
-    const updatedOrders: ServiceOrderProps[] = response.data.data.map(order => ({
-      id: order.data.id,
-      client: order.data.client,
-      vehicle: order.data.vehicle,
-      plate: order.data.plate,
-      year: order.data.year,
-      status: order.data.status,
-      description: order.data.description,
-      createdAt: order.data.createdAt
-    }));
-
-    setOrders(updatedOrders);
+    setHaveNewOrders(true);
   }
 
   useEffect(() => {
+    const getOrders = async () => {
+      const response = await api.get('/manage-service-order');
+
+      const updatedOrders: ServiceOrderProps[] = response.data.data.map(order => ({
+        id: order.data.id,
+        client: order.data.client,
+        vehicle: order.data.vehicle,
+        plate: order.data.plate,
+        year: order.data.year,
+        status: order.data.status,
+        description: order.data.description,
+        createdAt: order.data.createdAt
+      }));
+
+      setOrders(updatedOrders);
+    }
+
     getOrders();
-  }, []);
+
+    setHaveNewOrders(false);
+  }, [haveNewOrders]);
 
   return (
     <>
@@ -77,9 +82,9 @@ export default function Orders() {
           <thead>
             <tr>
               <th>ID</th>
+              <th>Cliente</th>
               <th>Veículo</th>
               <th>Placa</th>
-              <th>Mecânico</th>
               <th>Status</th>
               <th>Data</th>
               <th>Editar</th>
@@ -92,9 +97,9 @@ export default function Orders() {
                 return (
                   <tr key={serviceOrder.id}>
                     <td>{serviceOrder.id}</td>
+                    <td>{serviceOrder.client}</td>
                     <td>{serviceOrder.vehicle}</td>
                     <td>{serviceOrder.plate}</td>
-                    <td>{serviceOrder.mechanic}</td>
                     <td>{serviceOrder.status}</td>
                     <td>
                       {new Intl.DateTimeFormat('pt-BR').format(
