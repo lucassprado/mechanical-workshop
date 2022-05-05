@@ -1,25 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+
+import { api } from '../../services/axios';
 
 import { NewOrderModal } from '../../components/NewOrderModal';
 
 import styles from './styles.module.scss';
+
+import Link from 'next/link';
 
 import { MdEditNote } from 'react-icons/md';
 import { AiFillPlusCircle } from 'react-icons/ai';
 
 type ServiceOrderProps = {
   id: string;
-  vehicleName: string;
+  client: string;
+  vehicle: string;
   plate: string;
+  year: string;
   status: string;
   mechanic: string;
+  description: string;
   createdAt: Date;
 }
 
 export default function Orders() {
   const [isNewOrderModalOpen, setIsNewOrderModalOpen] = useState(false);
+
+  const [orders, setOrders] = useState<ServiceOrderProps[]>([]);
 
   function handleOpenNewOrderModal() {
     setIsNewOrderModalOpen(true);
@@ -29,11 +37,26 @@ export default function Orders() {
     setIsNewOrderModalOpen(false);
   }
 
-  const [serviceOrders, setServiceOrders] = useState<ServiceOrderProps[]>([
-    { id: '1', vehicleName: 'Palio', plate: 'HDA44512', status: 'Aguardando pagamento', mechanic: 'Jubileu', createdAt: new Date() },
-    { id: '2', vehicleName: 'Gol', plate: 'HDGBHABD556', status: 'Aguardando pagamento', mechanic: 'Elizeu', createdAt: new Date() },
-    { id: '3', vehicleName: 'Corsa', plate: 'HDGBHABD556', status: 'Aguardando pagamento', mechanic: 'Irineu', createdAt: new Date() },
-  ]);
+  async function getOrders() {
+    const response = await api.get('/manage-service-order');
+
+    const updatedOrders: ServiceOrderProps[] = response.data.data.map(order => ({
+      id: order.data.id,
+      client: order.data.client,
+      vehicle: order.data.vehicle,
+      plate: order.data.plate,
+      year: order.data.year,
+      status: order.data.status,
+      description: order.data.description,
+      createdAt: order.data.createdAt
+    }));
+
+    setOrders(updatedOrders);
+  }
+
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   return (
     <>
@@ -65,11 +88,11 @@ export default function Orders() {
 
           <tbody>
             {
-              serviceOrders.map(serviceOrder => {
+              orders.map(serviceOrder => {
                 return (
                   <tr key={serviceOrder.id}>
                     <td>{serviceOrder.id}</td>
-                    <td>{serviceOrder.vehicleName}</td>
+                    <td>{serviceOrder.vehicle}</td>
                     <td>{serviceOrder.plate}</td>
                     <td>{serviceOrder.mechanic}</td>
                     <td>{serviceOrder.status}</td>

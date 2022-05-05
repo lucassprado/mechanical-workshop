@@ -5,20 +5,27 @@ import { fauna } from '../../services/fauna';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const serviceOrder = req.body;
-    
-    console.log(serviceOrder)
+    const order = req.body;
 
     fauna.query(
       q.Create(
         q.Collection('service_orders'),
-        { data: serviceOrder }
+        { data: order }
       )
     );
 
     return res.status(200).json({ status: 'OK' })
+  } else if (req.method === 'GET') {
+    const response = await fauna.query(
+      q.Map(
+        q.Paginate(q.Documents(q.Collection('service_orders'))),
+        q.Lambda(x => q.Get(x))
+      )
+    )
+
+    return res.status(200).send(response);
   } else {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'POST and GET');
     res.status(405).end('Method not allowed');
   }
 }
