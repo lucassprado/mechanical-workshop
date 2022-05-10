@@ -93,29 +93,27 @@ export default function Orders() {
 
           <tbody>
             {
-              orders.map(serviceOrder => {
-                return (
-                  <tr key={serviceOrder.id}>
-                    <td>{serviceOrder.id}</td>
-                    <td>{serviceOrder.client}</td>
-                    <td>{serviceOrder.vehicle}</td>
-                    <td>{serviceOrder.plate}</td>
-                    <td>{serviceOrder.status}</td>
-                    <td>
-                      {new Intl.DateTimeFormat('pt-BR').format(
-                        new Date(serviceOrder.createdAt)
-                      )}
-                    </td>
-                    <td>
-                      <Link href='#'>
-                        <a>
-                          <MdEditNote/>
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })
+              orders.map(order => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.client}</td>
+                  <td>{order.vehicle}</td>
+                  <td>{order.plate}</td>
+                  <td>{order.status}</td>
+                  <td>
+                    {new Intl.DateTimeFormat('pt-BR').format(
+                      new Date(order.createdAt)
+                    )}
+                  </td>
+                  <td>
+                    <Link href={`/orders/${order.id}`}>
+                      <a>
+                        <MdEditNote/>
+                      </a>
+                    </Link>
+                  </td>
+                </tr>
+                ))
             }
           </tbody>
         </table>

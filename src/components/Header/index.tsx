@@ -15,7 +15,7 @@ export function Header() {
 
         <div>
             <Link href='/orders'>
-              <span>Ordens de Serviço</span>
+              <span>Ordens</span>
             </Link>
         </div>
       </div>
