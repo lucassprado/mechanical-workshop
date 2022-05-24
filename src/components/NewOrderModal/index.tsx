@@ -18,22 +18,21 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
   const [vehiclePlate, setVehiclePlate] = useState('');
   const [vehicleYear, setVehicleYear] = useState('');
   const [description, setDescription] = useState('');
+  const [chassi, setChassi] = useState('');
 
   async function handleCreateNewOrder(event: FormEvent) {
     event.preventDefault();
 
     const newOrder = {
-      id: new Date().getTime(),
       client: clientName,
-      vehicle: vehicleName,
-      plate: vehiclePlate,
+      vehicle_name: vehicleName,
+      license_plate: vehiclePlate,
       year: vehicleYear,
-      status: 1,
       description,
-      createdAt: new Date()
+      chassi
     }
 
-    await api.post('/manage-service-order', {
+    await api.post('/service-orders', {
       ...newOrder
     })
 
@@ -42,6 +41,7 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
     setVehiclePlate('');
     setVehicleYear('');
     setDescription('');
+    setChassi('');
 
     onRequestClose();
   }
@@ -74,6 +74,12 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
           type="text"
           placeholder="Carro"
           onChange={event => setVehicleName(event.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Chassi"
+          onChange={event => setChassi(event.target.value)}
         />
 
         <div className={styles.vehicleInfo}>

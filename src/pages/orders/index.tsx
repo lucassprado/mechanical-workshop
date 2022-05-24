@@ -9,10 +9,9 @@ import styles from './styles.module.scss';
 
 import Link from 'next/link';
 
-import { MdEditNote } from 'react-icons/md';
-import { AiFillPlusCircle } from 'react-icons/ai';
+import { AiFillPlusCircle, AiFillEye } from 'react-icons/ai';
 
-type ServiceOrderProps = {
+export type OrderProps = {
   id: string;
   client: string;
   vehicle: string;
@@ -28,7 +27,7 @@ export default function Orders() {
   const [isNewOrderModalOpen, setIsNewOrderModalOpen] = useState(false);
   const [haveNewOrders, setHaveNewOrders] = useState(false);
 
-  const [orders, setOrders] = useState<ServiceOrderProps[]>([]);
+  const [orders, setOrders] = useState<OrderProps[]>([]);
 
   function handleOpenNewOrderModal() {
     setIsNewOrderModalOpen(true);
@@ -42,17 +41,16 @@ export default function Orders() {
 
   useEffect(() => {
     const getOrders = async () => {
-      const response = await api.get('/manage-service-order');
+      const response = await api.get('/service-orders');
 
-      const updatedOrders: ServiceOrderProps[] = response.data.data.map(order => ({
-        id: order.data.id,
-        client: order.data.client,
-        vehicle: order.data.vehicle,
-        plate: order.data.plate,
-        year: order.data.year,
-        status: order.data.status,
-        description: order.data.description,
-        createdAt: order.data.createdAt
+      const updatedOrders: OrderProps[] = response.data.data.map(order => ({
+        id: order.id,
+        client: order.client,
+        vehicle: order.vehicle_name,
+        plate: order.license_plate,
+        year: order.year,
+        status: order.status,
+        createdAt: order.created_at
       }));
 
       setOrders(updatedOrders);
@@ -87,7 +85,7 @@ export default function Orders() {
               <th>Placa</th>
               <th>Status</th>
               <th>Data</th>
-              <th>Editar</th>
+              <th>Visualizar</th>
             </tr>
           </thead>
 
@@ -108,7 +106,7 @@ export default function Orders() {
                   <td>
                     <Link href={`/orders/${order.id}`}>
                       <a>
-                        <MdEditNote/>
+                        <AiFillEye />
                       </a>
                     </Link>
                   </td>
