@@ -13,8 +13,8 @@ interface NewOrderModalProps {
 Modal.setAppElement('#modal-root');
 
 export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
-  const [clientName, setClientName] = useState('');
-  const [vehicleName, setVehicleName] = useState('');
+  const [clientId, setClientId] = useState('');
+  const [vehicleId, setVehicleId] = useState('');
   const [vehiclePlate, setVehiclePlate] = useState('');
   const [vehicleYear, setVehicleYear] = useState('');
   const [description, setDescription] = useState('');
@@ -24,8 +24,8 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
     event.preventDefault();
 
     const newOrder = {
-      client: clientName,
-      vehicle_name: vehicleName,
+      client_id: clientId,
+      vehicle_id: vehicleId,
       license_plate: vehiclePlate,
       year: vehicleYear,
       description,
@@ -36,8 +36,8 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
       ...newOrder
     })
 
-    setClientName('');
-    setVehicleName('');
+    setClientId('');
+    setVehicleId('');
     setVehiclePlate('');
     setVehicleYear('');
     setDescription('');
@@ -66,14 +66,14 @@ export function NewOrderModal({ isOpen, onRequestClose }: NewOrderModalProps) {
 
         <input
           type="text"
-          placeholder="Cliente"
-          onChange={event => setClientName(event.target.value)}
+          placeholder="ID do cliente"
+          onChange={event => setClientId(event.target.value)}
         />
-
+ 
         <input
           type="text"
-          placeholder="Carro"
-          onChange={event => setVehicleName(event.target.value)}
+          placeholder="ID do veículo"
+          onChange={event => setVehicleId(event.target.value)}
         />
 
         <input

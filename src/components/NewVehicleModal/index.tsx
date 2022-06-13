@@ -1,4 +1,3 @@
-import { setHttpAgentOptions } from 'next/dist/server/config';
 import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
@@ -18,6 +17,7 @@ export function NewVehicleModal({ isOpen, onRequestClose }: NewVehicleModalProps
   const [manufacturer, setManufacturer] = useState('');
   const [year, setYear] = useState('');
   const [licensePlate, setLicensePlate] = useState('');
+  const [clientId, setClientId] = useState('');
 
   async function handleCreateNewVehicle(event: FormEvent) {
     event.preventDefault();
@@ -26,10 +26,10 @@ export function NewVehicleModal({ isOpen, onRequestClose }: NewVehicleModalProps
       model,
       manufacturer,
       year,
-      licensePlate
+      license_plate: licensePlate
     }
 
-    await api.post('/vehicles', {
+    await api.post(`/clients/${clientId}/vehicles`, {
       ...newVehicle
     })
 
@@ -58,6 +58,12 @@ export function NewVehicleModal({ isOpen, onRequestClose }: NewVehicleModalProps
     
       <form className={styles.container} onSubmit={handleCreateNewVehicle}>
         <h2>Cadastrar veículo</h2>
+
+        <input
+          type="text"
+          placeholder="ID do cliente"
+          onChange={event => setClientId(event.target.value)}
+        />
 
         <input
           type="text"
