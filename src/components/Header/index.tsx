@@ -17,6 +17,14 @@ export function Header() {
             <Link href='/orders'>
               <span>Ordens</span>
             </Link>
+
+            <Link href='/clients'>
+              <span>Clientes</span>
+            </Link>
+
+            <Link href='/vehicles'>
+              <span>Veículos</span>
+            </Link>
         </div>
       </div>
     </header>

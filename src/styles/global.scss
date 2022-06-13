@@ -48,3 +48,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto 1rem;
+  padding: 0 2rem;
+  height: calc(100vh - 5rem);
+}

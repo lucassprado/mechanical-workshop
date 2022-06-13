@@ -1,0 +1,76 @@
+.header {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    display: flex;
+    align-items: center;
+
+    font-size: 1.25rem;
+    color: #FFF;
+    background: var(--yellow-500);
+    border: 0;
+    padding: 0 1.5rem;
+    border-radius: .25rem;
+    height: 3rem;
+
+    transition: filter .2s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+      margin-left: .75rem;
+    }
+  }
+}
+
+.clientTable {
+  width: 100%;
+  border-spacing: 0 .5rem;
+
+  th {
+    font-weight: 400;
+    padding: 1rem 2rem;
+    text-align: center;
+    line-height: 1.5rem;
+  }
+
+  tbody {
+    tr {
+      transition: filter 0.2s;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
+
+  td {
+    padding: 1rem 2rem;
+    border: 0;
+    background-color: var(--gray-800);
+    text-align: center;
+
+    &:first-child {
+      color: var(--text-title);
+      border-top-left-radius: .25rem;
+      border-bottom-left-radius: .25rem;
+    }
+
+    &:last-child {
+      border-top-right-radius: .25rem;
+      border-bottom-right-radius: .25rem;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

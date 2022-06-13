@@ -25,10 +25,14 @@
       font-size: 1.2rem;
       transition: filter 0.2s;
       cursor: pointer;
-    }
 
-    &:hover {
-      filter: brightness(0.8);
+      &:hover {
+        filter: brightness(0.8);
+      }
+
+      & + span {
+        margin-left: 3rem;
+      }
     }
   }
 }

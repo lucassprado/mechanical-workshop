@@ -67,7 +67,7 @@ export default function Orders() {
         <title>Ordens de serviço | i.Fix</title>
       </Head>
 
-      <main className={styles.osContainer}>
+      <main className={`${styles.osContainer} container`}>
         <div className={styles.osHeader}>
           <h1>Ordens de Serviço</h1>
             <button onClick={handleOpenNewOrderModal}>
